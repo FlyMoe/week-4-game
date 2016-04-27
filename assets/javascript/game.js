@@ -178,30 +178,42 @@ function attack() {
 		defenderID = "defenderHP_fett";	
 	}
 
-	// document.getElementById("attack1").innerHTML = "You attacked "+counterAttackCharacter+" for "+attackPower+" damage";
 	$("#attack1").html("You attacked "+counterAttackCharacter+" for "+attackPower+" damage");
 	$("#attack2").html(counterAttackCharacter+" attacked you back for "+counterAttackPower+" damage");
-// console.log("attackerHP before: "+attackerHP);
-// console.log("counterAttackPower: "+counterAttackPower);
-	attackerHP = attackerHP - counterAttackPower;
-	// console.log("defenderHP before: "+defenderHP);
 	defenderHP = defenderHP - attackPower;
-	// console.log("attackerHP: "+attackerHP);
-	// console.log("defenderHP: "+defenderHP);
-	// console.log("attackerID: "+attackerID);
 	$("#"+attackerID).html(attackerHP);
 	$("#"+defenderID).html(defenderHP);
+
 	if(attackerHP <= 0) {
 		$("#attack1").html("");
 		$("#attack2").html("");
 		$("#win_lose").html("You have been defeated...... GAME OVER!");
-		var r= $('<input id="reset" type="button" value="reset" onclick="reset();"/>');
-        $("body").append(r);
+		var resetbutton = $('<input id="reset" type="button" value="reset" onclick="reset();"/>');
+        $("body").append(resetbutton);
         $("#button1").prop("disabled",true);
 	} else if (defenderHP <= 0) {
 		$("#win_lose").html("You won!");
+		$("#attack1").html("");
+		$("#attack2").html("");
+		won();
 	}	
 }
+
+function won () {
+	// Hide all row 3 images.
+	$("#row3_img1").hide();
+	$("#row3_img2").hide();
+	$("#row3_img3").hide();
+	$("#row3_img4").hide();	
+
+	// Reset attacker's Hit points
+	$("#attackerHP_han").html(attributes.han_solo.hp);
+	$("#attackerHP_kylo").html(attributes.kylo_ren.hp);
+	$("#attackerHP_r2d2").html(attributes.r2d2.hp);
+	$("#attackerHP_boba").html(attributes.boba_fett.hp);
+
+}
+
 
 function reset (){
 	// reset variables
@@ -217,16 +229,6 @@ function reset (){
 	attackerHP = 0;
 	defenderHP = 0;
 	counterAttackPower = 0;
-
-	// Make images clickable again
-	$("#row1_img1").on("click");
-	$("#row1_img2").on("click");
-	$("#row1_img3").on("click");
-	$("#row1_img4").on("click");
-	$("#row2_img1").on("click");
-	$("#row2_img2").on("click");
-	$("#row2_img3").on("click");
-	$("#row2_img4").on("click");
 
 	// Show/hide the appropriate images
 	$("#row1_img1").show();
