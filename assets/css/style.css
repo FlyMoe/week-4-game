@@ -60,3 +60,6 @@ img.displayed {
     width: 100px;
     height: auto;
 }
+.attack1, .attack2 {
+	float:left;
+}
